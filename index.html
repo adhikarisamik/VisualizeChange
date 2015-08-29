@@ -16,26 +16,25 @@
 
     <div id="container1" style="width:50%; height:800px; float: left">
 
-        <div id="mymap" class="map" style="width:90%; height:250px;"></div>
-        <div id="org" class="bub" align="left" style="width:100%; height:550px;"></div>
+        <div id="mymap" class="map" style="width:90%; height:240px;"></div>
+        <div id="org" class="bub" align="left" style="width:100%; height:550px;"> </div>
 
 
     </div>
 
-    <div id="container2" style="width:21%; height:700px; float: left">
+    <div id="container2" style="width:45%; height:800px; float: left">
 
 
-        <div id="row1" class="row1" style="width:100%; height:250px;"></div>
-        <div id="row3" class="row3" style="width:100%; height:250px;"></div>
+        <div id="row1" class="row1" style="width:50%; height:200px; float:left"></div>
+        <div id="row2" class="row2" style="width:50%; height:400px; float:right"></div>
+        <div id="row3" class="row3" style="width:50%; height:200px; float:left"></div>
+        <div id="hist1" class="hist1" style="width:100%; height:200px;"></div>
+        <div id="hist2" class="hist2" style="width:100%; height:200px;"></div>
 
 
-    </div>
-
-    <div id="container3" style="width:21%; height:700px; float: left">
-
-    <div id="row2" class="row2" align="right" style="width:100%; height:500px;"></div>
 
     </div>
+
 
 </div>
 
@@ -57,7 +56,8 @@
         var bubblecloud = dc.bubbleCloud("#holder .bub", group);
         var descChart = dc.rowChart("#holder .row2",group)
         var statusChart = dc.rowChart("#holder .row3",group)
-
+        var hist1 = dc.barChart("#holder .hist1", group);
+        var hist2 = dc.barChart("#holder .hist2", group);
 
 
 
@@ -93,6 +93,18 @@
         });
 
         var statusgroup = status.group().reduceCount();
+
+        var dayssince = data.dimension(function (d) {
+            return d["DaysSinceQuake"];
+        });
+
+        var dayssincegroup = dayssince.group().reduceCount();
+
+        var hh = data.dimension(function (d) {
+            return d["TotalHH"];
+        });
+
+        var hhgroup = hh.group().reduceCount();
 
 
         var org = data.dimension(function (d) {
@@ -220,6 +232,23 @@
                     .title(function(d){return d.value;})
                     .elasticX(true)
                     .xAxis().ticks(4)
+
+            hist1
+                    .dimension(dayssince)
+                    .group(dayssincegroup)
+                    .x(d3.scale.linear().domain([0,230]))
+                    .xAxisLabel("Days Since First Quake (04/25/15)")
+                    .yAxisLabel("Count")
+                    .elasticY(true);
+
+
+            hist2
+                    .dimension(hh)
+                    .group(hhgroup)
+                    .x(d3.scale.linear().domain([1,5000]))
+                    .xAxisLabel("Number of Households served")
+                    .yAxisLabel("Count")
+                    .elasticY(true);
 
 
             descChart.ordering(function(d) { return -d.value })
