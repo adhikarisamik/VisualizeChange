@@ -3,17 +3,40 @@
 <head>
     <meta charset="utf-8">
     <title>Nepal Earthquake</title>
-    <h3><i>Nepal Earthquake</i></h3>
+    <h3><i>Nepal Earthquake - Humanitarian Assistance Work Dashboard</i></h3>
     <link type="text/css" href="dcnew/web/css/leaflet.css" rel="stylesheet"/>
     <link type="text/css" href="dcnew/web/css/dc.css" rel="stylesheet"/>
 </head>
 
 
+
 <div id="holder">
-    <div id="mymap" class="map" style="width:25%; height:200px;"></div>
-    <div id="org" class="bub" style="width:50%; height:650px;"></div>
-    <div id="row" class="row" style="width:25%; height:200px;"></div>
-    <div id="pie" class="pie" style="width:25%; height:250px;"></div>
+
+    <a class="reset" href="javascript:dc.filterAll(group);dc.redrawAll(group);">Reset All</a>
+
+    <div id="container1" style="width:50%; height:800px; float: left">
+
+        <div id="mymap" class="map" style="width:90%; height:250px;"></div>
+        <div id="org" class="bub" align="left" style="width:100%; height:550px;"></div>
+
+
+    </div>
+
+    <div id="container2" style="width:21%; height:700px; float: left">
+
+
+        <div id="row1" class="row1" style="width:100%; height:250px;"></div>
+        <div id="row3" class="row3" style="width:100%; height:250px;"></div>
+
+
+    </div>
+
+    <div id="container3" style="width:21%; height:700px; float: left">
+
+    <div id="row2" class="row2" align="right" style="width:100%; height:500px;"></div>
+
+    </div>
+
 </div>
 
     <script type="text/javascript" src="dcnew/web/js/d3.js"></script>
@@ -27,44 +50,61 @@
 
     <script type="text/javascript">
 
-
-    d3.csv("data/nepalearthquake.csv", function (csv) {
-
-
-
-        var data = crossfilter(csv);
-
         var numberFormat = d3.format(".2f");
         var group = "Choropleth";
         var nepChart = dc_leaflet.choroplethChart("#holder .map", group);
-        var orgChart = dc.rowChart("#holder .row",group)
+        var sectChart = dc.rowChart("#holder .row1", group)
         var bubblecloud = dc.bubbleCloud("#holder .bub", group);
+        var descChart = dc.rowChart("#holder .row2",group)
+        var statusChart = dc.rowChart("#holder .row3",group)
 
+
+
+
+    d3.csv("data/nepalearthquake1.csv", function (csv) {
+
+        var data = crossfilter(csv);
 
         var district = data.dimension(function (d) {
-            return d["district2"];
+            return d["District"];
         });
 
         var districtgroup = district.group().reduceCount();
 
         var deathSum = district.group().reduce(reduceAdd, reduceRemove, reduceInitial);
 
-        var sector = data.dimension(function (d) {
-            return d["sector"];
+
+        var desc = data.dimension(function (d) {
+            return d["Desc"];
         });
 
-        var sectorgroup = sector.group().reduceCount();
+        var descgroup = desc.group().reduceCount();
+
+
+        var type = data.dimension(function (d) {
+            return d["Type"];
+        });
+
+        var typegroup = type.group().reduceCount();
+
+
+        var status = data.dimension(function (d) {
+            return d["Status"];
+        });
+
+        var statusgroup = status.group().reduceCount();
+
 
         var org = data.dimension(function (d) {
-            return d["org_acro"];
+            return d["Organization"];
         });
 
         var orggroup = org.group().reduceCount();
 
         function reduceAdd(p, v) {
-            p.total += +v.death;
-            p.total2 += +v.injuries;
-            p.total3 += +v.houses;
+            p.total += +v.Death;
+            p.total2 += +v.Injuries;
+            p.total3 += +v.PrivProp;
             ++p.count;
             p.average = d3.round((p.total / p.count), 2);
             p.average2 = d3.round((p.total2 / p.count), 2);
@@ -73,9 +113,9 @@
         }
 
         function reduceRemove(p, v) {
-            p.total -= +v.death;
-            p.total2 -= +v.injuries;
-            p.total3 -= +v.houses;
+            p.total -= +v.Death;
+            p.total2 -= +v.Injuries;
+            p.total3 -= +v.Houses;
             --p.count;
             p.average = d3.round((p.total / p.count), 2);
             p.average2 = d3.round((p.total2 / p.count), 2);
@@ -98,8 +138,8 @@
 
         d3.json("nepal-districts.geojson", function (d, districtJson) {
             nepChart
-                    .center([27.8,85.3])
-                    .zoom(7)
+                    .center([28.2,84.5])
+                    .zoom(6)
                     .dimension(district)
                     .group(deathSum)
                     .valueAccessor(function(p) { return p.value.count > 0 ? p.value.average : 0;})
@@ -134,7 +174,7 @@
                         return d.value;
                     })
                     .label(function(d) {
-                        return d.key;
+                        return d.key.substr(0,15);
                     })
                     .renderLabel(true)
                     .title(function(d) {
@@ -144,9 +184,9 @@
 
 
 
-            orgChart
-                    .dimension(sector)
-                    .group(sectorgroup)
+            descChart
+                    .dimension(desc)
+                    .group(descgroup)
                     .renderTitle(true)
                     .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
                     .label(function (d){
@@ -157,14 +197,38 @@
                     .xAxis().ticks(4)
 
 
+            sectChart
+                    .dimension(type)
+                    .group(typegroup)
+                    .renderTitle(true)
+                    .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
+                    .label(function (d){
+                        return d.key;
+                    })
+                    .title(function(d){return d.value;})
+                    .elasticX(true)
+                    .xAxis().ticks(4)
+
+            statusChart
+                    .dimension(status)
+                    .group(statusgroup)
+                    .renderTitle(true)
+                    .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
+                    .label(function (d){
+                        return d.key;
+                    })
+                    .title(function(d){return d.value;})
+                    .elasticX(true)
+                    .xAxis().ticks(4)
 
 
-
-            orgChart.ordering(function(d) { return -d.value })
-
-
+            descChart.ordering(function(d) { return -d.value })
+            sectChart.ordering(function(d) { return -d.value })
+            statusChart.ordering(function(d) { return -d.value })
 
             dc.renderAll(group);
+
+
 
 
 

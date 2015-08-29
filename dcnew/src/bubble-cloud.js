@@ -1,3 +1,9 @@
+/*!
+ * dc-addons v0.10.3
+ *
+ * 2015-08-26 14:19:42
+ *
+ */
 // Code copied and changed from https://github.com/vlandham/gates_bubbles
 
 (function () {
@@ -6,8 +12,8 @@
     dc.bubbleCloud = function (parent, chartGroup) {
         var _chart = dc.bubbleMixin(dc.capMixin(dc.bubbleChart()));
 
-        var LAYOUT_GRAVITY = 0.05;
-        var RADIUS_TRANSITION = 5000;
+        var LAYOUT_GRAVITY = 0.02;
+        var RADIUS_TRANSITION = 6000;
         var FRICTION = 0.9;
         var PADDING = 1;
 
@@ -108,15 +114,20 @@
             _circles.transition().duration(RADIUS_TRANSITION).attr('r', function (d) {
                 d.radius = _chart.bubbleR(d);
                 return d.radius;
-            });
+            })
+
         }
 
         function updateBubbles() {
             _circles.data(_chart.data())
-                .attr('r', function (d) {
-                    d.radius = _chart.bubbleR(d);
-                    return d.radius;
-                });
+                //.attr('r', function (d) {
+                //    d.radius = _chart.bubbleR(d);
+                //    return d.radius;
+                //})
+                //.attr('fill', function (d, i) {
+                //    return _chart.getColor(d, i);
+                //})
+
 
             _chart.doUpdateLabels(_gs);
             _chart.doUpdateTitles(_gs);
