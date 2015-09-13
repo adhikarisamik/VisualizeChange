@@ -488,14 +488,14 @@
                 var v = _dataMap[_chart.featureKeyAccessor()(feature)];
                 if (v && v.d) {
                     layer.key=v.d.key;
-                    if (_chart.renderPopup())
+                    if (!_chart.renderPopup())
                         layer.bindPopup(_chart.popup()(v.d,feature));
                     if (_chart.brushOn())
-                        layer.on("click",selectFilter);
+                        layer.on("click",selectFilter)
                 }
             };
 
-            var selectFilter = function(e) {
+            var selectFilter = function(e, layer) {
                 if (!e.target) {
                     return;
                 }
@@ -504,6 +504,7 @@
                     _chart.filter(filter);
                     dc.redrawAll(_chart.chartGroup());
                 });
+
             };
 
             return _chart.anchor(parent, chartGroup);

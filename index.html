@@ -2,269 +2,388 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta property="og:title" content="Nepal Earthquake"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://nepalhum.s3-website-us-east-1.amazonaws.com/" />
+    <meta property="og:image" content="" />
+    <meta property="og:site_name" content="Data" />
+    <meta property="fb:admins" content="1" />
     <title>Nepal Earthquake</title>
-    <h3><i>Nepal Earthquake - Humanitarian Assistance Work Dashboard</i></h3>
+    <h2><i>Interactive Dashboard: Nepal Earthquake - Humanitarian Assistance Work </i></h2>
     <link type="text/css" href="dcnew/web/css/leaflet.css" rel="stylesheet"/>
     <link type="text/css" href="dcnew/web/css/dc.css" rel="stylesheet"/>
 </head>
 
+<div id = "begin">
+    <p>On April 25, 2015, and May 12, 2015, Nepal suffered from two devastating earthquakes that killed more than 8000 people,
+        injured more than 20,000, and affected the lives of more than 8 million individuals living all over the world.
+        This dashboard is an attempt to explore and honor the tireless work of all humanitarian organizations
+        working in Nepal after the earthquake. </p>
+</div>
+<div id="track">
+
+    <div id = "track1" style="width:40%; height:90px; float:left">
+
+    <a href="https://twitter.com/share" class="twitter-share-button"
+       data-url="http://nepalhum.s3-website-us-east-1.amazonaws.com/" data-via="AdhikariSamik" data-lang="en"><span style="text-align-all: right">Tweet</span></a>
+    <script>
+        ! function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, "script", "twitter-wjs");
+    </script>
+
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="fb-like" data-href="http://nepalhum.s3-website-us-east-1.amazonaws.com/" data-send="false"
+         data-layout="button_count" data-width="450" data-show-faces="true" data-font="arial"></div>
 
 
-<div id="holder">
+    <a class="reset" href="javascript:dc.filterAll(group);dc.redrawAll(group);"><p><u><span style="color: blue">Reset All</span></u></p></a>
+    </div>
 
-    <a class="reset" href="javascript:dc.filterAll(group);dc.redrawAll(group);">Reset All</a>
-
-    <div id="container1" style="width:50%; height:800px; float: left">
-
-        <div id="mymap" class="map" style="width:90%; height:240px;"></div>
-        <div id="org" class="bub" align="left" style="width:100%; height:550px;"> </div>
-
+    <div id = "track2" style="width:59%; height:90px; float:left">
+        <div id = "box1" class="dist" style="width:33%; height:60px; float:left">Districts:</div>
+        <div id = "box1" class="org" style="width:33%; height:60px; ">Organizations:</div>
+        <div id = "box1" class="desc" style="width:33%; height:60px; float:right">Sector-items:</div>
 
     </div>
 
-    <div id="container2" style="width:45%; height:800px; float: left">
+</div>
 
 
-        <div id="row1" class="row1" style="width:50%; height:200px; float:left"></div>
-        <div id="row2" class="row2" style="width:50%; height:400px; float:right"></div>
-        <div id="row3" class="row3" style="width:50%; height:200px; float:left"></div>
-        <div id="hist1" class="hist1" style="width:100%; height:200px;"></div>
-        <div id="hist2" class="hist2" style="width:100%; height:200px;"></div>
+<div id="holder">
+    <RIGHT>Click on the map to view by district</RIGHT>
+    <div id="container1" style="width:100%; height:550px">
+        <div id="mymap" class="map" style="width:41%; height:250px; float:left"></div>
+        <div id="label1" style="width:58%; height:20px; float:right">Click to view by organization (Bubble size represents number of tasks)</div>
+        <div id="org" class="bub" align="left" style="width:58%; height:550px; float:right"></div>
+        Brush to view by date range
+        <div id="hist1" class="hist1" style="width:41%; height:260px;float:left"></div>
 
 
+    </div>
+    Click to view by sector
+    <div id="container2" style="width:100%; height:420px; float: left">
+
+
+        <div id="row1" class="row1" style="width:41%; height:200px; float:left"></div>
+        <div id="label2" style="width:58%; height:20px; float:right">Click to view by items</div>
+        <div id="row2" class="row2" style="width:58%; height:400px; float:right"></div>
+        Click to view by status of task
+        <div id="row3" class="row3" style="width:41%; height:200px; float:left"></div>
 
     </div>
 
 
 </div>
 
+<div  id = "footer" style="float:left">
+
+    <p>&copy Samik Adhikari || <u><span style="color: blue">adhikari.samik@gmail.com</span></u> || <a href="https://twitter.com/AdhikariSamik" class="twitter-follow-button" data-show-count="false">Follow @AdhikariSamik</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> </p>
+    <p>Data last accessed on August 20, 2015 from UN OCHA's Humanitarian Data Exchange (HDX).</p>
+    <p>Background image from: http://wallpapersphotospictures.com/2015/04/nepal-hd-wallpapers/</p>
+
+</div>
+
+
     <script type="text/javascript" src="dcnew/web/js/d3.js"></script>
     <script type="text/javascript" src="dcnew/web/js/crossfilter.js"></script>
     <script type="text/javascript" src="dcnew/web/js/dc.js"></script>
     <script type="text/javascript" src="dcnew/web/js/leaflet.js"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.js"></script>
+
     <script type="text/javascript" src="dcnew/dc.leaflet.js"></script>
     <script type="text/javascript" src="dcnew/src/bubble-cloud.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
-    <script type="text/javascript">
-
-        var numberFormat = d3.format(".2f");
-        var group = "Choropleth";
-        var nepChart = dc_leaflet.choroplethChart("#holder .map", group);
-        var sectChart = dc.rowChart("#holder .row1", group)
-        var bubblecloud = dc.bubbleCloud("#holder .bub", group);
-        var descChart = dc.rowChart("#holder .row2",group)
-        var statusChart = dc.rowChart("#holder .row3",group)
-        var hist1 = dc.barChart("#holder .hist1", group);
-        var hist2 = dc.barChart("#holder .hist2", group);
+    <script>
+        $('#label1').css({marginTop: '-=20px'});
+//        $('#org').css({marginTop: '-=15px'});
 
 
+            var numberFormat = d3.format(".2f");
+            var group = "Choropleth";
+            var nepChart = dc_leaflet.choroplethChart("#holder .map", group);
+            var sectChart = dc.rowChart("#holder .row1", group)
+            var bubblecloud = dc.bubbleCloud("#holder .bub", group);
+            var descChart = dc.rowChart("#holder .row2", group)
+            var statusChart = dc.rowChart("#holder .row3", group)
+            var hist1 = dc.barChart("#holder .hist1", group);
 
-    d3.csv("data/nepalearthquake1.csv", function (csv) {
-
-        var data = crossfilter(csv);
-
-        var district = data.dimension(function (d) {
-            return d["District"];
-        });
-
-        var districtgroup = district.group().reduceCount();
-
-        var deathSum = district.group().reduce(reduceAdd, reduceRemove, reduceInitial);
-
-
-        var desc = data.dimension(function (d) {
-            return d["Desc"];
-        });
-
-        var descgroup = desc.group().reduceCount();
+            var boxND = dc.numberDisplay("#track2 .dist", group);
+            var boxND2 = dc.numberDisplay("#track2 .org", group);
+            var boxND3 = dc.numberDisplay("#track2 .desc", group);
 
 
-        var type = data.dimension(function (d) {
-            return d["Type"];
-        });
 
-        var typegroup = type.group().reduceCount();
+                d3.csv("data/nepalearthquake1.csv", function (csv) {
 
+                    var data = crossfilter(csv);
 
-        var status = data.dimension(function (d) {
-            return d["Status"];
-        });
+                    var district = data.dimension(function (d) {
+                        return d["District"];
+                    });
 
-        var statusgroup = status.group().reduceCount();
-
-        var dayssince = data.dimension(function (d) {
-            return d["DaysSinceQuake"];
-        });
-
-        var dayssincegroup = dayssince.group().reduceCount();
-
-        var hh = data.dimension(function (d) {
-            return d["TotalHH"];
-        });
-
-        var hhgroup = hh.group().reduceCount();
+                    var districtgroup = district.group().reduceCount();
 
 
-        var org = data.dimension(function (d) {
-            return d["Organization"];
-        });
+                    var dist = data.dimension(function (d) {
+                        return d["Dist"];
+                    });
+                    var distgroup = dist.group();
 
-        var orggroup = org.group().reduceCount();
-
-        function reduceAdd(p, v) {
-            p.total += +v.Death;
-            p.total2 += +v.Injuries;
-            p.total3 += +v.PrivProp;
-            ++p.count;
-            p.average = d3.round((p.total / p.count), 2);
-            p.average2 = d3.round((p.total2 / p.count), 2);
-            p.average3 = d3.round((p.total3 / p.count), 2);
-            return p;
-        }
-
-        function reduceRemove(p, v) {
-            p.total -= +v.Death;
-            p.total2 -= +v.Injuries;
-            p.total3 -= +v.Houses;
-            --p.count;
-            p.average = d3.round((p.total / p.count), 2);
-            p.average2 = d3.round((p.total2 / p.count), 2);
-            p.average3 = d3.round((p.total3 / p.count), 2);
-            return p;
-        }
-
-        function reduceInitial(p, v) {
-            return {
-                total: 0,
-                total2: 0,
-                total3: 0,
-                count: 0,
-                average: 0,
-                average2: 0,
-                average3: 0
-            };
-        }
+                    var deathSum = district.group().reduce(reduceAdd, reduceRemove, reduceInitial);
 
 
-        d3.json("nepal-districts.geojson", function (d, districtJson) {
-            nepChart
-                    .center([28.2,84.5])
-                    .zoom(6)
-                    .dimension(district)
-                    .group(deathSum)
-                    .valueAccessor(function(p) { return p.value.count > 0 ? p.value.average : 0;})
-                    .colors(d3.scale.quantize().range(["#fee0d2", "#fb6a4a", "#ef3b2c", "#cb181d", "#a50f15", "#67000d"]))
-                    .colorDomain([0, 3553])
-                    .colorAccessor(function(d) {
-                        return d.value.average;
-                    })
-                    .geojson(districtJson.features)
-                    .featureKeyAccessor(function (feature) {
-                        return feature.properties.DISTRICT;
-                    })
-                    .renderPopup(true)
-                    .popup(function (d) {
-                        return "District: " + d.key
-                                + "<br/> Total Death: " + d.value.average;
+                    var desc = data.dimension(function (d) {
+                        return d["Desc"];
+                    });
 
+                    var descgroup = desc.group().reduceCount();
+
+                    var des = data.dimension(function (d) {
+                        return d["Des"];
+                    });
+                    var desgroup = des.group();
+
+
+                    var type = data.dimension(function (d) {
+                        return d["Type"];
+                    });
+
+                    var typegroup = type.group().reduceCount();
+
+
+                    var status = data.dimension(function (d) {
+                        return d["Status"];
+                    });
+
+                    var statusgroup = status.group().reduceCount();
+
+                    var dayssince = data.dimension(function (d) {
+                        return d["DaysSinceQuake"];
+                    });
+
+                    var dayssincegroup = dayssince.group().reduceCount();
+
+                    var hh = data.dimension(function (d) {
+                        return d["TotalHH"];
                     });
 
 
+                    var org = data.dimension(function (d) {
+                        return d["Organization"];
+                    });
 
-            bubblecloud
-                    .dimension(org)
-                    .group(orggroup)
-                    .x(d3.scale.ordinal())
-                    .r(d3.scale.linear())
-                    .radiusValueAccessor(function(d) {
-                        return 0.00015* d.value;
-                    })
-                    .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
-                    .colorAccessor(function(d) {
-                        return d.value;
-                    })
-                    .label(function(d) {
-                        return d.key.substr(0,15);
-                    })
-                    .renderLabel(true)
-                    .title(function(d) {
-                        return d.key + ': ' + d.value;
-                    })
-                    .renderTitle(true)
+                    var orggroup = org.group().reduceCount();
 
 
+                    var orgn = data.dimension(function (d) {
+                        return d["Orgn"];
+                    });
+                    var orgngroup= orgn.group();
 
-            descChart
-                    .dimension(desc)
-                    .group(descgroup)
-                    .renderTitle(true)
-                    .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
-                    .label(function (d){
-                        return d.key;
-                    })
-                    .title(function(d){return d.value;})
-                    .elasticX(true)
-                    .xAxis().ticks(4)
+                    function reduceAdd(p, v) {
+                        p.total += +v.Death;
+                        p.total2 += +v.Injuries;
+                        p.total3 += +v.PrivProp;
+                        ++p.count;
+                        p.average = d3.round((p.total / p.count), 2);
+                        p.average2 = d3.round((p.total2 / p.count), 2);
+                        p.average3 = d3.round((p.total3 / p.count), 2);
+                        return p;
+                    }
 
+                    function reduceRemove(p, v) {
+                        p.total -= +v.Death;
+                        p.total2 -= +v.Injuries;
+                        p.total3 -= +v.Houses;
+                        --p.count;
+                        p.average = d3.round((p.total / p.count), 2);
+                        p.average2 = d3.round((p.total2 / p.count), 2);
+                        p.average3 = d3.round((p.total3 / p.count), 2);
+                        return p;
+                    }
 
-            sectChart
-                    .dimension(type)
-                    .group(typegroup)
-                    .renderTitle(true)
-                    .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
-                    .label(function (d){
-                        return d.key;
-                    })
-                    .title(function(d){return d.value;})
-                    .elasticX(true)
-                    .xAxis().ticks(4)
+                    function reduceInitial(p, v) {
+                        return {
+                            total: 0,
+                            total2: 0,
+                            total3: 0,
+                            count: 0,
+                            average: 0,
+                            average2: 0,
+                            average3: 0
+                        };
+                    }
 
-            statusChart
-                    .dimension(status)
-                    .group(statusgroup)
-                    .renderTitle(true)
-                    .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
-                    .label(function (d){
-                        return d.key;
-                    })
-                    .title(function(d){return d.value;})
-                    .elasticX(true)
-                    .xAxis().ticks(4)
-
-            hist1
-                    .dimension(dayssince)
-                    .group(dayssincegroup)
-                    .x(d3.scale.linear().domain([0,230]))
-                    .xAxisLabel("Days Since First Quake (04/25/15)")
-                    .yAxisLabel("Count")
-                    .elasticY(true);
-
-
-            hist2
-                    .dimension(hh)
-                    .group(hhgroup)
-                    .x(d3.scale.linear().domain([1,5000]))
-                    .xAxisLabel("Number of Households served")
-                    .yAxisLabel("Count")
-                    .elasticY(true);
-
-
-            descChart.ordering(function(d) { return -d.value })
-            sectChart.ordering(function(d) { return -d.value })
-            statusChart.ordering(function(d) { return -d.value })
-
-            dc.renderAll(group);
+                    d3.json("nepal-districts.geojson", function (d, districtJson) {
 
 
 
+                        nepChart
+                                .center([28.2, 84.5])
+                                .zoom(6)
+                                .dimension(district)
+                                .group(deathSum)
+                                .valueAccessor(function (p) {
+                                    return p.value.count > 0 ? p.value.average : 0;
+                                })
+                                .colors(d3.scale.quantize().range(["#fee0d2", "#fb6a4a", "#ef3b2c", "#cb181d", "#a50f15", "#67000d"]))
+                                .colorDomain([0, 3553])
+                                .colorAccessor(function (d) {
+                                    return d.value.average;
+                                })
+                                .geojson(districtJson.features)
+                                .featureKeyAccessor(function (feature) {
+                                    return feature.properties.DISTRICT;
+                                })
+                                .renderPopup(true)
+                                .brushOn(true)
+                                .popup(function (d) {
+                                    return "District: " + d.key
+                                            + "<br/> Total Death: " + d.value.average;
+
+                                });
 
 
-        });
 
-    });
+                        bubblecloud
+                                .dimension(org)
+                                .group(orggroup)
+                                .x(d3.scale.ordinal())
+                                .r(d3.scale.linear())
+                                .radiusValueAccessor(function (d) {
+                                    return 0.00015 * d.value;
+                                })
+                                .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
+                                .colorAccessor(function (d) {
+                                    return d.value;
+                                })
+                                .label(function (d) {
+                                    return d.key.substr(0, 15);
+                                })
+                                .renderLabel(true)
+                                .title(function (d) {
+                                    return d.key + ': ' + d.value;
+                                })
+                                .renderTitle(true)
 
+
+                        descChart
+                                .dimension(desc)
+                                .group(descgroup)
+                                .renderTitle(true)
+                                .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
+                                .label(function (d) {
+                                    return d.key;
+                                })
+                                .title(function (d) {
+                                    return d.value;
+                                })
+                                .elasticX(true)
+                                .xAxis().ticks(4)
+
+
+                        sectChart
+                                .dimension(type)
+                                .group(typegroup)
+                                .renderTitle(true)
+                                .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
+                                .label(function (d) {
+                                    return d.key;
+                                })
+                                .title(function (d) {
+                                    return d.value;
+                                })
+                                .elasticX(true)
+                                .xAxis().ticks(4)
+
+                        statusChart
+                                .dimension(status)
+                                .group(statusgroup)
+                                .renderTitle(true)
+                                .colors(d3.scale.ordinal().range(["#2171b5", "#9ecae1", "#deebf7"]))
+                                .label(function (d) {
+                                    return d.key;
+                                })
+                                .title(function (d) {
+                                    return d.value;
+                                })
+                                .elasticX(true)
+                                .xAxis().ticks(4)
+
+                        hist1
+                                .dimension(dayssince)
+                                .group(dayssincegroup)
+                                .x(d3.scale.linear().domain([0, 230]))
+                                .xAxisLabel("Days Since First Quake (04/25/15)")
+                                .yAxisLabel("Count")
+                                .elasticY(true);
+
+                        function bin_counter(group) {
+                            return {
+                                value: function() {
+                                    return group.all().filter(function(kv) {
+                                        return kv.value > 0;
+                                    }).length;
+                                }
+                            };
+                        }
+
+                        boxND
+                                .width(200).height(200)
+                                .formatNumber(d3.format(".1s"))
+                                .valueAccessor(function(d){return d})
+                                .group(bin_counter(distgroup));
+
+                        boxND2
+                                .width(200).height(200)
+                                .formatNumber(d3.format(".1s"))
+                                .valueAccessor(function(d){return d})
+                                .group(bin_counter(orgngroup));
+
+                        boxND3
+                                .width(200).height(200)
+                                .formatNumber(d3.format(".1s"))
+                                .valueAccessor(function(d){return d})
+                                .group(bin_counter(desgroup));
+
+
+
+
+                        descChart.ordering(function (d) {
+                            return -d.value
+                        })
+                        sectChart.ordering(function (d) {
+                            return -d.value
+                        })
+                        statusChart.ordering(function (d) {
+                            return -d.value
+                        })
+
+                        dc.renderAll(group);
+
+
+                    });
+
+                });
 
 
 </script>

@@ -1,22 +1,52 @@
 *{
     font-family: 'Lato';
-    color: #665544;
-    text-align: center;
+    color: black;
+    text-align: left;
+
 
 }
 
+
+
+#mymap{
+    border:1px solid black;
+}
+#org{
+    border:1px solid black;
+    font-size: 12px;
+}
 #hist1{
-
-    font-size: 10px
+    border:1px solid black;
+    font-size: 12px;
 }
 
-#hist2{
-
-    font-size: 10px
+#row1{
+    border:1px solid black;
+}
+#row2{
+    border:1px solid black;
+}
+#row3{
+    border:1px solid black;
+}
+#box1 {
+    color: #d8b365;
+    text-align: center;
+    font-size:25px;
+    line-height: 50px;
+    background-color: #d3d3d3;
+    /* rounded corners */
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    /*margin-top: 6%;*/
+    /*margin-left: 5%;*/
+    -webkit-box-shadow: 0px 0px 10px 0px #000;
+    box-shadow: 0px 0px 10px 0px #000;
+    z-index: 7;
 }
 
-body{
-    background-image: url('https://github.com/adhikarisamik/adhikarisamik.github.io/blob/master/css/light_grey.png?raw=true');}
+
 
 div.dc-chart {
     float: left;
@@ -167,6 +197,7 @@ div.dc-chart {
 .dc-chart .bubble {
     stroke: none;
     fill-opacity: 0.6;
+    font-size:12px;
 }
 
 .dc-data-count {
@@ -235,7 +266,7 @@ div.dc-chart {
 
 .dc-chart g.row text {
     fill: white;
-    font-size: 10px;
+    font-size: 12px;
     cursor: pointer;
 }
 
@@ -344,3 +375,8 @@ div.dc-chart {
     fill: black;
 }
 
+
+body{
+    background-image: url('n1.jpg');
+
+}
